@@ -21,3 +21,10 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+#Compiled files
+main.exe
+main.out
+a.out
+main
+m.exe
+key-value.exe
