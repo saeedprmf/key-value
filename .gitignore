@@ -28,3 +28,7 @@ a.out
 main
 m.exe
 key-value.exe
+#logs
+logs
+log.txt
+log*

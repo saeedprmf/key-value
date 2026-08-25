@@ -1,3 +1,3 @@
-module github.com/saeedprmf/key-value
+module key-value
 
 go 1.26.6
