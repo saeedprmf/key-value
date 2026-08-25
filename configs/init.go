@@ -3,19 +3,16 @@ package configs
 import (
 	"encoding/json"
 	"key-value/core"
+	"key-value/widget"
 	"log"
-	"os"
 )
 
 
 func Init(){
 	core.Log("start initializing configs of app ... ")
-	f , err := os.ReadFile("configs/configs.json")
-	if err != nil{
-		panic(err)
-	}
+	d , err := widget.ReadFile("configs/configs.json")
 	
-	err = json.Unmarshal(f , &config)
+	err = json.Unmarshal(d , &config)
 	if err != nil{
 		panic(err)
 	}
