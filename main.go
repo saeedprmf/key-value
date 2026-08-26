@@ -11,8 +11,6 @@ import (
 )
 
 
-//TODO: handle errors and dont use panic()
-
 
 func exit(sigchan <- chan os.Signal){
     sig := <- sigchan
