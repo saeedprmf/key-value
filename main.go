@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"key-value/configs"
 	"key-value/core"
+	"key-value/widget"
 	"os"
 	"os/signal"
 	"syscall"
@@ -17,16 +18,26 @@ func exit(sigchan <- chan os.Signal){
     sig := <- sigchan
     fmt.Println(sig)
 
-    core.ShotDown()
+   
 
 }
 
 
 
 func main(){
-    core.Log("starting app ...")
+    
+    widget.Log("starting app ...")
+    for{
+        err := configs.Init()
+        if err != nil{
+            fmt.Println(err)
+            fmt.Scanln()
+        } else {
+            break
+        }
+    }
     core.Init()
-    configs.Init()
+    
 
     sigchan := make(chan os.Signal)
     signal.Notify(sigchan , syscall.SIGINT , syscall.SIGTERM)

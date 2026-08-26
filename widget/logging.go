@@ -1,8 +1,7 @@
-package core
+package widget
 
 import (
 	"bytes"
-	"key-value/widget"
 	"log"
 )
 
@@ -28,7 +27,7 @@ func Log(data string){
 	applog.logger.Println(data)
 	applog.counter += 1
 	if applog.counter >= 3{
-		widget.WriteFileApend(applog.buf.String() , "log.txt")
+		WriteFileApend(applog.buf.String() , "log.txt")
 		applog.buf.Reset()
 		applog.counter = 0
 	}

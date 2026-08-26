@@ -1,6 +1,7 @@
 package widget
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -16,7 +17,13 @@ func (re *ReadError)Error()string{
 func WriteFileApend(data string , fname string){
 	f , err := os.OpenFile(fname , os.O_APPEND|os.O_WRONLY|os.O_CREATE,0664)
 	if err != nil {
-		panic(err)
+		if os.IsNotExist(err){
+			fmt.Println(fname , "is not exist pleas put it in corect directory")
+			Log("file "+fname+" is not exist")
+		} else {
+			fmt.Println("there is some errors with opening ",fname," file")
+			Log("unexpected error " + err.Error())
+		}
 	}
 	_ , err = f.WriteString(data)
 }
