@@ -6,6 +6,14 @@ import (
 )
 
 
+const (
+	Red = "\033[31m"
+	Reset = "\033[0m"
+	Green = "\033[32m"
+)
+
+
+
 type LogBase struct{
 	buf bytes.Buffer
 	logger *log.Logger
@@ -23,8 +31,11 @@ var applog = NewAppLog()
 
 
 
-func Log(data string){
+func Log(data any , tag string, color string){
 	applog.logger.Println(data)
+	
+	log.Println(color , tag , Reset , data)
+
 	applog.counter += 1
 	if applog.counter >= 3{
 		WriteFileApend(applog.buf.String() , "log.txt")

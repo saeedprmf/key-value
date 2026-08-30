@@ -19,10 +19,9 @@ func WriteFileApend(data string , fname string){
 	if err != nil {
 		if os.IsNotExist(err){
 			fmt.Println(fname , "is not exist pleas put it in corect directory")
-			Log("file "+fname+" is not exist")
+			Log("file "+fname+" is not exist" , "[ERROR] : " , Red)
 		} else {
-			fmt.Println("there is some errors with opening ",fname," file")
-			Log("unexpected error " + err.Error())
+			Log("unexpected error " + err.Error() , "[ERROR] : " , Red)
 		}
 	}
 	_ , err = f.WriteString(data)

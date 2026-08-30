@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"key-value/configs"
 	"key-value/core"
 	"key-value/widget"
@@ -10,38 +9,22 @@ import (
 	"syscall"
 )
 
-
-
-func exit(sigchan <- chan os.Signal){
-    sig := <- sigchan
-    fmt.Println(sig)
-
-   
+func exit(sigchan <-chan os.Signal) {
+	sig := <-sigchan
+	widget.ShutDown()
+	widget.Log(sig , "[INFO] : " , widget.Green)
 
 }
 
+func main() {
 
+	widget.Log("starting app ..." , "[INFO] : " , widget.Green)
+	configs.Init()
+	core.Init()
 
-func main(){
-    
-    widget.Log("starting app ...")
-    for{
-        err := configs.Init()
-        if err != nil{
-            fmt.Println(err)
-            fmt.Scanln()
-        } else {
-            break
-        }
-    }
-    core.Init()
-    
+	sigchan := make(chan os.Signal)
+	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 
-    sigchan := make(chan os.Signal)
-    signal.Notify(sigchan , syscall.SIGINT , syscall.SIGTERM)
-
-    exit(sigchan)
+	exit(sigchan)
 
 }
-
-
